@@ -7,4 +7,5 @@ EditorBuildSettings:
   m_Scenes: []
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: ceac168ba92ecce41962c01a027b9e5e, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 539e002404674684f9b10a0e05c8f951, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 0ce6899daf6cf514f9099e5db88b16ad, type: 2}

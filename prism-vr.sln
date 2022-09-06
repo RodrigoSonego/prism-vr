@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{B4A65808-16E8-E9F3-75D6-E884FA334D36}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Platform", "Pico.Platform.csproj", "{65082A16-F3D6-00C1-D5FD-7813924CA5A8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Spatializer", "Pico.Spatializer.csproj", "{A234AD82-256A-660E-7809-571DD20D0D7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.PicoXR", "Unity.XR.PicoXR.csproj", "{FB6812B9-6EF8-B021-4351-EFCE9AA882FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Spatializer.Example", "Pico.Spatializer.Example.csproj", "{188E7503-2130-3A3E-EEA1-1F4382EF15E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Spatializer", "Pico.Spatializer.csproj", "{A234AD82-256A-660E-7809-571DD20D0D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{B4A65808-16E8-E9F3-75D6-E884FA334D36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.PicoXR.Editor", "Unity.XR.PicoXR.Editor.csproj", "{C90A311F-2378-05DF-53FD-8ABC9E9F5F56}"
 EndProject
@@ -19,18 +19,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65082A16-F3D6-00C1-D5FD-7813924CA5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65082A16-F3D6-00C1-D5FD-7813924CA5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65082A16-F3D6-00C1-D5FD-7813924CA5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65082A16-F3D6-00C1-D5FD-7813924CA5A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A234AD82-256A-660E-7809-571DD20D0D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A234AD82-256A-660E-7809-571DD20D0D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A234AD82-256A-660E-7809-571DD20D0D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A234AD82-256A-660E-7809-571DD20D0D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB6812B9-6EF8-B021-4351-EFCE9AA882FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB6812B9-6EF8-B021-4351-EFCE9AA882FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB6812B9-6EF8-B021-4351-EFCE9AA882FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +31,14 @@ Global
 		{188E7503-2130-3A3E-EEA1-1F4382EF15E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{188E7503-2130-3A3E-EEA1-1F4382EF15E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{188E7503-2130-3A3E-EEA1-1F4382EF15E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A234AD82-256A-660E-7809-571DD20D0D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A234AD82-256A-660E-7809-571DD20D0D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A234AD82-256A-660E-7809-571DD20D0D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A234AD82-256A-660E-7809-571DD20D0D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A65808-16E8-E9F3-75D6-E884FA334D36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C90A311F-2378-05DF-53FD-8ABC9E9F5F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C90A311F-2378-05DF-53FD-8ABC9E9F5F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C90A311F-2378-05DF-53FD-8ABC9E9F5F56}.Release|Any CPU.ActiveCfg = Release|Any CPU

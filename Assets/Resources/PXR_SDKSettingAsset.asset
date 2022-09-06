@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
-  m_Script: {fileID: 11500000, guid: 8e08befb1867d8945b4f1ddac43e65c5, type: 3}
+  m_Script: {fileID: 11500000, guid: eafdfc92c58bba147b19b2a39db9af7b, type: 3}
   m_Name: PXR_SDKSettingAsset
   m_EditorClassIdentifier: 
   ignoreSDKSetting: 1
