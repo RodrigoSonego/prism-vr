@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
@@ -26,6 +24,22 @@ public class MouseMovement : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerTransform.Rotate(Vector3.up * mouseX);
+
+        if (Input.GetMouseButton(0))
+        {
+            CanGrabCube();
+        }
     }
+
+    private bool CanGrabCube()
+    {
+        RaycastHit hit;
+
+        bool hasHit = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 15f, 1);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+
+        return hasHit;
+    }
+
 #endif
 }
