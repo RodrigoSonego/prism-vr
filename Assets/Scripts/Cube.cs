@@ -40,5 +40,6 @@ public class Cube : MonoBehaviour, IPointerClickHandler
 
         float angle = transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
         spawnedCube.transform.position = new Vector3(Mathf.Sin(angle) * distanceToPlayer, transform.position.y, Mathf.Cos(angle) * distanceToPlayer);
+        spawnedCube.transform.LookAt(transform);
     }
 }

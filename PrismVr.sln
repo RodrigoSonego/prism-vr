@@ -1,7 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Platform", "Pico.Platform.csproj", "{DD2ACF1D-5B80-E305-A87D-9512F3D027DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.PicoXR", "Unity.XR.PicoXR.csproj", "{C99ABA4B-8C8D-757F-5013-B777A89ABD4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Spatializer.Example", "Pico.Spatializer.Example.csproj", "{BB80F94B-A555-380C-3A2C-B53840AD8A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pico.Spatializer", "Pico.Spatializer.csproj", "{65107E7E-2F4F-9D10-34C8-16D00BA8A4ED}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{BF6E3501-78CA-3D4F-DB7D-B70A5AC78EEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.PicoXR.Editor", "Unity.XR.PicoXR.Editor.csproj", "{EDBD99FA-5E27-2F8B-1B4A-E7769C980B0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +19,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD2ACF1D-5B80-E305-A87D-9512F3D027DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2ACF1D-5B80-E305-A87D-9512F3D027DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2ACF1D-5B80-E305-A87D-9512F3D027DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2ACF1D-5B80-E305-A87D-9512F3D027DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99ABA4B-8C8D-757F-5013-B777A89ABD4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99ABA4B-8C8D-757F-5013-B777A89ABD4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99ABA4B-8C8D-757F-5013-B777A89ABD4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99ABA4B-8C8D-757F-5013-B777A89ABD4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB80F94B-A555-380C-3A2C-B53840AD8A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB80F94B-A555-380C-3A2C-B53840AD8A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB80F94B-A555-380C-3A2C-B53840AD8A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB80F94B-A555-380C-3A2C-B53840AD8A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65107E7E-2F4F-9D10-34C8-16D00BA8A4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65107E7E-2F4F-9D10-34C8-16D00BA8A4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65107E7E-2F4F-9D10-34C8-16D00BA8A4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65107E7E-2F4F-9D10-34C8-16D00BA8A4ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF6E3501-78CA-3D4F-DB7D-B70A5AC78EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF6E3501-78CA-3D4F-DB7D-B70A5AC78EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF6E3501-78CA-3D4F-DB7D-B70A5AC78EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF6E3501-78CA-3D4F-DB7D-B70A5AC78EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBD99FA-5E27-2F8B-1B4A-E7769C980B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBD99FA-5E27-2F8B-1B4A-E7769C980B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBD99FA-5E27-2F8B-1B4A-E7769C980B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBD99FA-5E27-2F8B-1B4A-E7769C980B0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
