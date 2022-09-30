@@ -5,6 +5,8 @@ public class MouseMovement : MonoBehaviour
 	public float mouseSensitivity = 100f;
 
 	public Transform playerTransform;
+
+	[SerializeField] float radius = 10f;
 	
 	private float xRotation = 0f;
 
@@ -12,6 +14,7 @@ public class MouseMovement : MonoBehaviour
 	void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
+		print(transform.forward * radius);
 	}
 
 	void Update()
@@ -25,10 +28,22 @@ public class MouseMovement : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 		playerTransform.Rotate(Vector3.up * mouseX);
 
-		//if (Input.GetMouseButton(0))
+
+		Vector3 newCuboPos = transform.forward * radius;
+		if (Input.GetMouseButtonDown(0))
 		{
+			//print("desired: " + newCuboPos.y);
+			//float height = radius * Mathf.Tan(xRotation);
+			//print("height: "+height);
+
 			CanGrabCube();
 		}
+        if (cubo)
+        {
+			cubo.transform.position = new Vector3(newCuboPos.x, 1, newCuboPos.z - 10);
+		}
+			
+		
 	}
 
 	GameObject cubo;
@@ -59,7 +74,7 @@ public class MouseMovement : MonoBehaviour
 		//Vector3 direction = transform.forward;
 		//bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 15f, 1);
 		Gizmos.color = Color.blue;
-		Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3f);
+		Gizmos.DrawLine(transform.position, transform.position + transform.forward * 10f);
 		
 	}
 
