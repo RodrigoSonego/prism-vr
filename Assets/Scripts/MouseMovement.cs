@@ -30,17 +30,19 @@ public class MouseMovement : MonoBehaviour
 
 
 		Vector3 newCuboPos = transform.forward * radius;
-		if (Input.GetMouseButtonDown(0))
+
+
+		if (Input.GetMouseButton(0))
 		{
-			//print("desired: " + newCuboPos.y);
-			//float height = radius * Mathf.Tan(xRotation);
-			//print("height: "+height);
 
 			CanGrabCube();
-		}
-        if (cubo)
-        {
-			cubo.transform.position = new Vector3(newCuboPos.x, 1, newCuboPos.z - 10);
+			if (cubo != null)
+			{
+				float ang = -xRotation * Mathf.Deg2Rad;
+				float h = Mathf.Tan(ang) * radius;
+
+				cubo.transform.position = new Vector3(playerTransform.forward.x * radius, h, playerTransform.forward.z * radius);
+			}
 		}
 			
 		
@@ -49,20 +51,20 @@ public class MouseMovement : MonoBehaviour
 	GameObject cubo;
 	private bool CanGrabCube()
 	{
-		print("tenta");
 		bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 150f);
 		Debug.DrawRay(transform.position, transform.forward);
 		if (hasHit)
         {
 			cubo = hit.transform.gameObject;
-			Debug.LogError("hitando o cubo");
+
 			hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+
+			return hasHit;
 		}
 		else if (cubo != null)
         {
 			cubo.GetComponent<MeshRenderer>().material.color = Color.red;
         }
-
 		return hasHit;
 	}
 
@@ -75,7 +77,19 @@ public class MouseMovement : MonoBehaviour
 		//bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 15f, 1);
 		Gizmos.color = Color.blue;
 		Gizmos.DrawLine(transform.position, transform.position + transform.forward * 10f);
-		
+
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawLine(transform.position, playerTransform.forward * 10);
+			
+		if(cubo != null)
+        {
+			Gizmos.color = Color.red;
+			Gizmos.DrawLine(transform.position, cubo.transform.position);
+
+			Gizmos.color = Color.green;
+			Gizmos.DrawLine(playerTransform.forward * 10, cubo.transform.position);
+		}
+
 	}
 
 #endif
