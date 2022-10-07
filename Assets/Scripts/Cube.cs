@@ -3,43 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Cube : MonoBehaviour, IPointerClickHandler
+public class Cube : MonoBehaviour
 {
-    const float TAU = Mathf.PI * 2;
+    private bool isBeingGrabbed = false;
 
-    [SerializeField] private float distanceToPlayer = 10f;
-    [SerializeField] private Camera playerCamera;
-
-    private bool selected = false;
-
-    private Cube spawnedCube;
-
-    public void OnPointerClick(PointerEventData eventData)
+    public void GetGrabbed(Transform playerAnchor, Transform cameraAnchor, float radius)
     {
-        selected = !selected;
-        print(Vector3.Distance(transform.position,playerCamera.transform.position));
-        
-        
-        spawnedCube = Instantiate(this);
-
-        print("dist do cubo: " + Vector3.Distance(spawnedCube.transform.position, transform.position));
+        isBeingGrabbed = true;
+        StartCoroutine(GetDraggedByPlayer(playerAnchor, cameraAnchor, radius));
     }
 
-    //macaquisse
-    void Update()
+    IEnumerator GetDraggedByPlayer(Transform playerAnchor, Transform cameraAnchor, float radius)
     {
-        if(selected == false) { return; }
+        while(isBeingGrabbed) 
+        {
+            float cameraRotation = cameraAnchor.localRotation.eulerAngles.x;
+            float ang = -cameraRotation * Mathf.Deg2Rad;
+            float height = Mathf.Tan(ang) * radius;
 
-        UpdateCubePos();
-        
-    }
+            transform.position = new Vector3(playerAnchor.forward.x * radius, height, playerAnchor.forward.z * radius);
 
-    private void UpdateCubePos()
-    {
-        if(spawnedCube is null) { return; }
+            Vector3 directionToPlayer = (playerAnchor.position - transform.position).normalized;
+            float angleToPlayer = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, angleToPlayer, 0));
 
-        float angle = transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
-        spawnedCube.transform.position = new Vector3(Mathf.Sin(angle) * distanceToPlayer, transform.position.y, Mathf.Cos(angle) * distanceToPlayer);
-        spawnedCube.transform.LookAt(transform);
+            yield return null;
+        }
     }
 }

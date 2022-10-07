@@ -10,6 +10,7 @@ public class MouseMovement : MonoBehaviour
 	
 	private float xRotation = 0f;
 
+	Cube cubo;
 
 	void Start()
 	{
@@ -28,44 +29,34 @@ public class MouseMovement : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 		playerTransform.Rotate(Vector3.up * mouseX);
 
-
-		Vector3 newCuboPos = transform.forward * radius;
-
-
-		if (Input.GetMouseButton(0))
+		if (Input.GetMouseButtonDown(0))
 		{
 
-			CanGrabCube();
-			if (cubo != null)
+			Cube cube = TryToGrabCube();
+			if (cube != null)
 			{
-				float ang = -xRotation * Mathf.Deg2Rad;
-				float h = Mathf.Tan(ang) * radius;
-
-				cubo.transform.position = new Vector3(playerTransform.forward.x * radius, h, playerTransform.forward.z * radius);
+				cube.GetGrabbed(playerTransform, transform, radius);
 			}
 		}
 			
 		
 	}
 
-	GameObject cubo;
-	private bool CanGrabCube()
+	private Cube TryToGrabCube()
 	{
 		bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 150f);
 		Debug.DrawRay(transform.position, transform.forward);
 		if (hasHit)
         {
-			cubo = hit.transform.gameObject;
+			Cube cube = hit.transform.gameObject.GetComponent<Cube>();
+			cubo = cube;
 
 			hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
 
-			return hasHit;
+			return cube;
 		}
-		else if (cubo != null)
-        {
-			cubo.GetComponent<MeshRenderer>().material.color = Color.red;
-        }
-		return hasHit;
+
+		return null;
 	}
 
 
