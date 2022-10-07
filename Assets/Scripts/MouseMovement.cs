@@ -35,7 +35,7 @@ public class MouseMovement : MonoBehaviour
 			Cube cube = TryToGrabCube();
 			if (cube != null)
 			{
-				cube.GetGrabbed(playerTransform, transform, radius);
+				cube.ToggleGrabbed(playerTransform, transform, radius);
 			}
 		}
 			

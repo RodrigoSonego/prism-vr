@@ -1,17 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Cube : MonoBehaviour
 {
     private bool isBeingGrabbed = false;
 
-    public void GetGrabbed(Transform playerAnchor, Transform cameraAnchor, float radius)
+    public void ToggleGrabbed(Transform playerAnchor, Transform cameraAnchor, float radius)
     {
+        if(isBeingGrabbed)
+        {
+            isBeingGrabbed = false;
+            return;
+        }
+
         isBeingGrabbed = true;
         StartCoroutine(GetDraggedByPlayer(playerAnchor, cameraAnchor, radius));
     }
+
+
 
     IEnumerator GetDraggedByPlayer(Transform playerAnchor, Transform cameraAnchor, float radius)
     {
