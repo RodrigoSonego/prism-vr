@@ -41,7 +41,16 @@ public class Test : MonoBehaviour
 
 			// ax + b
 			Vector3 offset = new Vector3(Mathf.Cos(ang) * dist, (unit * slope) + origin.transform.position.y , Mathf.Sin(ang) * dist);
+
+			var rotatedVector = Quaternion.AngleAxis(90, Vector3.down) * offset;
+			var hasHit = Physics.Raycast(transform.position + offset, rotatedVector.normalized * 0.15f, 0.15f, LayerMask.NameToLayer("Prism")); ;
+
+			Gizmos.color = hasHit ? Color.red : Color.white;
 			Gizmos.DrawSphere(transform.position + offset, 0.05f);
+
+			Gizmos.color = hasHit ? Color.red : Color.blue;
+			Gizmos.DrawRay(transform.position + offset, rotatedVector.normalized * 0.15f);
+
 		}
 		
 	}
