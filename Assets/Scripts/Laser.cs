@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public class Laser : MonoBehaviour
 {
 	const float TAU = 6.28318530f;
 
