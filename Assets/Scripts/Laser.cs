@@ -9,7 +9,7 @@ public class Laser : MonoBehaviour
 	[SerializeField] private Transform origin;
 	[SerializeField] private LineRenderer lineRenderer;
 
-	[SerializeField] private int maxPoints = 100;
+	[SerializeField] private int maxPoints = 200;
 
 	[SerializeField] private float slope = 0f;
 	[SerializeField] private float height = 1.5f;
@@ -46,24 +46,23 @@ public class Laser : MonoBehaviour
 
 		float dist = Vector2.Distance(pos2D, originPos2D);
 
-		for (int i = 0; i < maxPoints - initialIndex; i++)
+		for (int i = 0; i < maxPoints - initialIndex; ++i)
 		{
-			var ang = startAng + (i / (float)(maxPoints - 1)) * TAU * clockwiseModifier;
-			float unit = i / (float)maxPoints;
+            float ang = startAng + (i) / 100f * TAU * clockwiseModifier;
+			float unit = i * height / 100f;
 
 			int positionIndex = i + initialIndex;
 
 			// ax + b
-			Vector3 offset = new Vector3(Mathf.Cos(ang) * dist, (unit * slope) + origin.y, Mathf.Sin(ang) * dist);
-
+			Vector3 offset = new(Mathf.Cos(ang) * dist, (unit * slope) + origin.y, Mathf.Sin(ang) * dist);
 			Vector3 pointPosition = transform.position + offset;
 
 			bool hasHit = false;
-			if(positionIndex > 0)
-            {
+			if (positionIndex > 0)
+			{
 				Vector3 directionToCurrent = pointPosition - lineRenderer.GetPosition(positionIndex - 1);
 				hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, 0.15f, LayerMask.NameToLayer("Prism")); ;
-            }
+			}
 
 			lineRenderer.SetPosition(positionIndex, pointPosition);
 
