@@ -10,12 +10,10 @@ public class MouseMovement : MonoBehaviour
 	
 	private float xRotation = 0f;
 
-	Cube cubo;
 
 	void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
-		print(transform.forward * radius);
 	}
 
 	void Update()
@@ -31,9 +29,8 @@ public class MouseMovement : MonoBehaviour
 
 		if (Input.GetMouseButtonDown(0))
 		{
-
-			Cube cube = TryToGrabCube();
-			if (cube != null)
+			bool couldFindCube = TryToGrabCube(out Cube cube);
+			if (couldFindCube)
 			{
 				cube.ToggleGrabbed(playerTransform, transform, radius);
 			}
@@ -42,46 +39,24 @@ public class MouseMovement : MonoBehaviour
 		
 	}
 
-	private Cube TryToGrabCube()
+	private bool TryToGrabCube(out Cube foundCube)
 	{
 		bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 150f);
 		Debug.DrawRay(transform.position, transform.forward);
 		if (hasHit)
         {
-			Cube cube = hit.transform.gameObject.GetComponent<Cube>();
-			cubo = cube;
+			foundCube = hit.transform.gameObject.GetComponent<Cube>();
+			// pode dar null nessa merda, tratar sa merda
+			//cubo = cube;
 
 			hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
 
-			return cube;
+			//foundCube = cube;
+			return foundCube != null;
 		}
 
-		return null;
+		foundCube = null;
+		return false;
 	}
 
-
-
-#if UNITY_EDITOR_WIN
-	private void OnDrawGizmos()
-    {
-		//Vector3 direction = transform.forward;
-		//bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 15f, 1);
-		Gizmos.color = Color.blue;
-		Gizmos.DrawLine(transform.position, transform.position + transform.forward * 10f);
-
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawLine(transform.position, playerTransform.forward * 10);
-			
-		if(cubo != null)
-        {
-			Gizmos.color = Color.red;
-			Gizmos.DrawLine(transform.position, cubo.transform.position);
-
-			Gizmos.color = Color.green;
-			Gizmos.DrawLine(playerTransform.forward * 10, cubo.transform.position);
-		}
-
-	}
-
-#endif
 }

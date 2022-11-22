@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class Laser : MonoBehaviour
 {
 	const float TAU = 6.28318530f;
@@ -9,17 +10,19 @@ public class Laser : MonoBehaviour
 	[SerializeField] private Transform origin;
 	[SerializeField] private LineRenderer lineRenderer;
 
-	[SerializeField] private int maxPoints = 200;
+	[Range(0, 10_000)] [SerializeField] private int maxPoints = 200;
 
 	[SerializeField] private float slope = 0f;
 	[SerializeField] private float height = 1.5f;
 
-	void Start()
-	{
-		//RenderSpriral(origin.transform.position, 0, isClockwise: true);
+
+    void Update()
+    {
+		lineRenderer.positionCount = maxPoints;
+		RenderSpriral(origin.transform.position, 0, isClockwise: true);
 	}
 
-	void OnDrawGizmos()
+    void OnDrawGizmos()
 	{
 		Gizmos.color = Color.cyan;
 		Gizmos.DrawSphere(origin.position, 0.1f);
@@ -28,10 +31,8 @@ public class Laser : MonoBehaviour
 		Gizmos.DrawSphere(transform.position, 0.05f);
 
 		Gizmos.color = Color.white;
-
-		lineRenderer.positionCount = maxPoints;
-		RenderSpriral(origin.transform.position, 0, isClockwise: true);
 	}
+
 
 	void RenderSpriral(Vector3 origin, int initialIndex, bool isClockwise)
 	{
@@ -69,9 +70,10 @@ public class Laser : MonoBehaviour
 			if (hasHit)
 			{
 				Vector3 lastPosition = lineRenderer.GetPosition(positionIndex - 1);
-				RenderSpriral(lastPosition, positionIndex+1, !isClockwise);
+				RenderSpriral(lastPosition, positionIndex + 1, !isClockwise);
 				break;
 			}
 		}
 	}
+
 }
