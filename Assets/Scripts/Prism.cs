@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Cube : MonoBehaviour
+public class Prism : MonoBehaviour
 {
     private bool isBeingGrabbed = false;
     private Quaternion originalRotation;

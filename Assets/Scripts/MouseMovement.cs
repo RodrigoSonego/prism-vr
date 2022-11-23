@@ -29,7 +29,7 @@ public class MouseMovement : MonoBehaviour
 
 		if (Input.GetMouseButtonDown(0))
 		{
-			bool couldFindCube = TryToGrabCube(out Cube cube);
+			bool couldFindCube = TryToGrabCube(out Prism cube);
 			if (couldFindCube)
 			{
 				cube.ToggleGrabbed(playerTransform, transform);
@@ -39,13 +39,13 @@ public class MouseMovement : MonoBehaviour
 		
 	}
 
-	private bool TryToGrabCube(out Cube foundCube)
+	private bool TryToGrabCube(out Prism foundCube)
 	{
 		bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 150f);
 		Debug.DrawRay(transform.position, transform.forward);
 		if (hasHit)
         {
-			foundCube = hit.transform.gameObject.GetComponent<Cube>();
+			foundCube = hit.transform.gameObject.GetComponent<Prism>();
 			// pode dar null nessa merda, tratar sa merda
 			//cubo = cube;
 
