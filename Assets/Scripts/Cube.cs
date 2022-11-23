@@ -4,10 +4,18 @@ using UnityEngine;
 public class Cube : MonoBehaviour
 {
     private bool isBeingGrabbed = false;
+    private Quaternion originalRotation;
 
-    public void ToggleGrabbed(Transform playerAnchor, Transform cameraAnchor, float radius)
+    void Start()
     {
-        if(isBeingGrabbed)
+        originalRotation = transform.localRotation;
+    }
+
+    public void ToggleGrabbed(Transform playerAnchor, Transform cameraAnchor)
+    {
+        float radius = Mathf.Abs(Vector3.Distance(transform.position, playerAnchor.position));
+
+        if (isBeingGrabbed)
         {
             isBeingGrabbed = false;
             return;
@@ -47,6 +55,8 @@ public class Cube : MonoBehaviour
     {
         Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
         float angleToPlayer = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, angleToPlayer, 0));
+
+        Vector3 rotationVector = new Vector3(0, angleToPlayer, 0);
+        transform.localRotation = Quaternion.Euler(rotationVector + originalRotation.eulerAngles);
     }
 }
