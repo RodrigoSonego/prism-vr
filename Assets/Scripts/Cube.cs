@@ -13,13 +13,16 @@ public class Cube : MonoBehaviour
 
     public void ToggleGrabbed(Transform playerAnchor, Transform cameraAnchor)
     {
-        float radius = Mathf.Abs(Vector3.Distance(transform.position, playerAnchor.position));
-
         if (isBeingGrabbed)
         {
             isBeingGrabbed = false;
             return;
         }
+
+        Vector2 player2dPos = new(playerAnchor.position.x, playerAnchor.position.z);
+        Vector2 prism2dPos = new(transform.position.x, transform.position.z);
+
+        float radius = Vector2.Distance(player2dPos, prism2dPos);
 
         isBeingGrabbed = true;
         StartCoroutine(GetDraggedByPlayer(playerAnchor, cameraAnchor, radius));
