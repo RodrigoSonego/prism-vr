@@ -9,6 +9,7 @@ public class Laser : MonoBehaviour
 
 	[SerializeField] private Transform origin;
 	[SerializeField] private LineRenderer lineRenderer;
+	[SerializeField] private LayerMask prismLayer;
 
 	[Range(0, 10_000)] [SerializeField] private int maxPoints = 200;
 
@@ -62,7 +63,7 @@ public class Laser : MonoBehaviour
 			if (positionIndex > 0)
 			{
 				Vector3 directionToCurrent = pointPosition - lineRenderer.GetPosition(positionIndex - 1);
-				hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, 0.15f, LayerMask.NameToLayer("Prism")); ;
+				hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, 0.15f, prismLayer) ;
 			}
 
 			lineRenderer.SetPosition(positionIndex, pointPosition);
