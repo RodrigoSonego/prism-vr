@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class Prism : MonoBehaviour
 {
+    [SerializeField] private Outline outline;
+
     private bool isBeingGrabbed = false;
     private Quaternion originalRotation;
 
     void Start()
     {
         originalRotation = transform.localRotation;
+
+        if (outline is null) { return; }
+
+        outline.enabled = false;
     }
 
     public void ToggleGrabbed(Transform playerAnchor, Transform cameraAnchor)
@@ -16,6 +22,7 @@ public class Prism : MonoBehaviour
         if (isBeingGrabbed)
         {
             isBeingGrabbed = false;
+            outline.enabled = false;
             return;
         }
 
@@ -23,6 +30,8 @@ public class Prism : MonoBehaviour
         Vector2 prism2dPos = new(transform.position.x, transform.position.z);
 
         float radius = Vector2.Distance(player2dPos, prism2dPos);
+
+        outline.enabled = true;
 
         isBeingGrabbed = true;
         StartCoroutine(GetDraggedByPlayer(playerAnchor, cameraAnchor, radius));
@@ -56,7 +65,7 @@ public class Prism : MonoBehaviour
 
     private void RotateTowardsPlayer(Transform playerTransform)
     {
-        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        Vector3 directionToPlayer = (playerTransform.forward - transform.position).normalized;
         float angleToPlayer = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
 
         Vector3 rotationVector = new Vector3(0, angleToPlayer, 0);

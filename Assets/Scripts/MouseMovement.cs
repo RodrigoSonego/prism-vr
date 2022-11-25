@@ -46,12 +46,7 @@ public class MouseMovement : MonoBehaviour
 		if (hasHit)
         {
 			foundCube = hit.transform.gameObject.GetComponent<Prism>();
-			// pode dar null nessa merda, tratar sa merda
-			//cubo = cube;
 
-			hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
-
-			//foundCube = cube;
 			return foundCube != null;
 		}
 
