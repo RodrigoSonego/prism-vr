@@ -9,7 +9,7 @@ public class Laser : MonoBehaviour
 
 	[SerializeField] private Transform origin;
 	[SerializeField] private LineRenderer lineRenderer;
-	[SerializeField] private LayerMask prismLayer;
+	[SerializeField] private LayerMask collidableLayers;
 
 	[Range(0, 10_000)] [SerializeField] private int maxPoints = 200;
 
@@ -59,21 +59,32 @@ public class Laser : MonoBehaviour
 			Vector3 offset = new(Mathf.Cos(ang) * dist, (unit * slope) + origin.y, Mathf.Sin(ang) * dist);
 			Vector3 pointPosition = transform.position + offset;
 
-			bool hasHit = false;
+			bool hasHitPrism = false;
+			bool hasHitAbsorb = false;
 			if (positionIndex > 0)
 			{
 				Vector3 directionToCurrent = pointPosition - lineRenderer.GetPosition(positionIndex - 1);
-				hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, 0.15f, prismLayer) ;
+
+				bool hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, out RaycastHit hit, 0.15f, collidableLayers);
+
+				hasHitPrism = hasHit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Prism");
+				hasHitAbsorb = hasHit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Absorb");
 			}
 
 			lineRenderer.SetPosition(positionIndex, pointPosition);
 
-			if (hasHit)
+			if (hasHitPrism)
 			{
 				Vector3 lastPosition = lineRenderer.GetPosition(positionIndex - 1);
 				RenderSpriral(lastPosition, positionIndex + 1, !isClockwise);
 				break;
 			}
+
+			if (hasHitAbsorb)
+            {
+				lineRenderer.positionCount = positionIndex + 1;
+				break;
+            }
 		}
 	}
 
