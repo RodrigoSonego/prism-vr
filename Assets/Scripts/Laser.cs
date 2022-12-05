@@ -20,13 +20,13 @@ public class Laser : MonoBehaviour
 	[SerializeField] private float height = 1.5f;
 
 
-    void Update()
-    {
+	void Update()
+	{
 		lineRenderer.positionCount = maxPoints;
 		RenderSpriral(origin.transform.position, 0, isClockwise: true);
 	}
 
-    void OnDrawGizmos()
+	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.cyan;
 		Gizmos.DrawSphere(origin.position, 0.1f);
@@ -53,7 +53,7 @@ public class Laser : MonoBehaviour
 
 		for (int i = 0; i < maxPoints - initialIndex; ++i)
 		{
-            float ang = startAng + (i) / 100f * TAU * clockwiseModifier;
+			float ang = startAng + (i) / 100f * TAU * clockwiseModifier;
 			float unit = i * height / 100f;
 
 			int positionIndex = i + initialIndex;
@@ -62,33 +62,44 @@ public class Laser : MonoBehaviour
 			Vector3 offset = new(Mathf.Cos(ang) * dist, (unit * slope) + origin.y, Mathf.Sin(ang) * dist);
 			Vector3 pointPosition = transform.position + offset;
 
-			bool hasHitPrism = false;
-			bool hasHitAbsorb = false;
+			bool hasHit = false;
+			RaycastHit hit = new();
 			if (positionIndex > 0)
 			{
 				Vector3 directionToCurrent = pointPosition - lineRenderer.GetPosition(positionIndex - 1);
 
-				bool hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, out RaycastHit hit, 0.15f, collidableLayers);
-
-				hasHitPrism = hasHit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Prism");
-				hasHitAbsorb = hasHit && hit.transform.gameObject.layer == LayerMask.NameToLayer("Absorb");
+				hasHit = Physics.Raycast(pointPosition, directionToCurrent.normalized, out hit, 0.15f, collidableLayers);
 			}
 
 			lineRenderer.SetPosition(positionIndex, pointPosition);
 
-			if (hasHitPrism)
+			if (hasHit == false) { continue; }
+
+			lineRenderer.positionCount++;
+			lineRenderer.SetPosition(positionIndex + 1, hit.point);
+
+			if (HasHitPrism(hit))
 			{
-				Vector3 lastPosition = lineRenderer.GetPosition(positionIndex - 1);
-				RenderSpriral(lastPosition, positionIndex + 1, !isClockwise);
+				RenderSpriral(pointPosition, positionIndex + 2, !isClockwise);
 				break;
 			}
 
-			if (hasHitAbsorb)
-            {
+			if (HasHitAbsorb(hit))
+			{
 				lineRenderer.positionCount = positionIndex + 1;
 				break;
-            }
+			}
 		}
+	}
+
+	bool HasHitPrism(RaycastHit hit)
+	{
+		return hit.transform.gameObject.layer == LayerMask.NameToLayer("Prism");
+	}	
+
+	bool HasHitAbsorb(RaycastHit hit)
+	{
+	   return hit.transform.gameObject.layer == LayerMask.NameToLayer("Absorb");
 	}
 
 }
