@@ -1,13 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 [ExecuteAlways]
 public class Laser : MonoBehaviour
 {
 	const float TAU = 6.28318530f;
 
+	[Header("External")]
 	[SerializeField] private Transform origin;
+	
+	[Space(8)]
+	[Header("Internal")]
 	[SerializeField] private LineRenderer lineRenderer;
 	[SerializeField] private LayerMask collidableLayers;
 
