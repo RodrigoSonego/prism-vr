@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
 {
-	public float mouseSensitivity = 100f;
+	[SerializeField] private Transform playerTransform;
+	const float MouseSensitivity = 300f;
 
-	public Transform playerTransform;
-
-	[SerializeField] float radius = 10f;
 	
-	private float xRotation = 0f;
-
-
 	void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
@@ -18,24 +13,18 @@ public class MouseMovement : MonoBehaviour
 
 	void Update()
 	{
-		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-		xRotation -= mouseY;
-		xRotation = Mathf.Clamp(xRotation, -90, 90);
-
-		transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-		playerTransform.Rotate(Vector3.up * mouseX);
+		float timeSpeed = MouseSensitivity * Time.deltaTime;
+		Vector3 rotation = timeSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+		playerTransform.rotation = Quaternion.Euler(playerTransform.eulerAngles + rotation);
 
 		if (Input.GetMouseButtonDown(0))
 		{
 			bool couldFindCube = TryToGrabCube(out Prism cube);
 			if (couldFindCube)
 			{
-				cube.ToggleGrabbed(playerTransform, transform);
+				cube.ToggleGrabbed(playerTransform);
 			}
 		}
-			
 		
 	}
 
@@ -46,7 +35,6 @@ public class MouseMovement : MonoBehaviour
 		if (hasHit)
         {
 			foundCube = hit.transform.gameObject.GetComponent<Prism>();
-
 			return foundCube != null;
 		}
 
