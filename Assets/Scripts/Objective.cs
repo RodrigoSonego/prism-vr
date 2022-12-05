@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Objective : MonoBehaviour
@@ -8,13 +9,27 @@ public class Objective : MonoBehaviour
 
     private bool activated = false;
 
-    public void ActivateLight()
+    void Start()
     {
-        mainMesh.material = activatedMaterial;
+        StartCoroutine(BlinkLight());
     }
 
-    public void DeactivateLight()
+    public void ActivateWithLaser()
     {
-        mainMesh.material = fadedMaterial;
+        mainMesh.material = activatedMaterial;
+
+        StopAllCoroutines();
+    }
+
+    IEnumerator BlinkLight()
+    {
+        while (true)
+        {
+            mainMesh.material = activated ? fadedMaterial : activatedMaterial;
+
+            activated = !activated;
+
+            yield return new WaitForSeconds(1.5f);
+        }
     }
 }

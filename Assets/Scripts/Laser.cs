@@ -94,7 +94,7 @@ public class Laser : MonoBehaviour
             {
 				Objective objective = hit.transform.gameObject.GetComponent<Objective>();
 
-				objective.ActivateLight();
+				objective.ActivateWithLaser();
 
 				lineRenderer.positionCount = positionIndex + 2;
 				break;
