@@ -30,8 +30,10 @@ public class MouseMovement : MonoBehaviour
 
 	private bool TryToGrabCube(out Prism foundCube)
 	{
-		bool hasHit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 150f);
-		Debug.DrawRay(transform.position, transform.forward);
+		Vector3 forward = transform.forward;
+		Vector3 pos = transform.position;
+		bool hasHit = Physics.Raycast(pos, forward, out RaycastHit hit, 150f);
+		Debug.DrawRay(pos, forward);
 		if (hasHit)
         {
 			foundCube = hit.transform.gameObject.GetComponent<Prism>();
