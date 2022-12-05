@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-// ReSharper disable Unity.InefficientPropertyAccess
 
 public class Prism : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class Prism : MonoBehaviour
 	const float HeightMax = 10f;
 
 	float radius;
-	
 	
 	void Start()
 	{
@@ -28,8 +26,7 @@ public class Prism : MonoBehaviour
 	{
 		if (isBeingGrabbed)
 		{
-			isBeingGrabbed = false;
-			outline.enabled = false;
+			Drop();
 			return;
 		}
 
@@ -37,6 +34,21 @@ public class Prism : MonoBehaviour
 		isBeingGrabbed = true;
 		
 		StartCoroutine(GetDraggedByPlayer(playerAnchor));
+	}
+
+	public void DisablePrism()
+    {
+		isBeingGrabbed = false;
+		Drop();
+
+		GetComponent<Collider>().enabled = false;
+    }
+
+
+	private void Drop()
+    {
+		isBeingGrabbed = false;
+		outline.enabled = false;
 	}
 
 	private IEnumerator GetDraggedByPlayer(Transform playerAnchor)

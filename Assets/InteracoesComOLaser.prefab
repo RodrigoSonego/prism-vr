@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8128371327045705535}
+  - component: {fileID: 6988934896524136604}
   m_Layer: 0
   m_Name: InteracoesComOLaser
   m_TagString: Untagged
@@ -31,3 +32,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6988934896524136604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967589035605758292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36430e8afe2737f43992500d95f58dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

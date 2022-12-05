@@ -19,9 +19,12 @@ public class Laser : MonoBehaviour
 	[SerializeField] private float slope = 0f;
 	[SerializeField] private float height = 1.5f;
 
+	private bool hasHitObjective = false;
 
-	void Update()
+    void Update()
 	{
+		if (hasHitObjective) { return; }
+
 		lineRenderer.positionCount = maxPoints;
 		RenderSpriral(origin.transform.position, 0, isClockwise: true);
 	}
@@ -97,6 +100,10 @@ public class Laser : MonoBehaviour
 				objective.ActivateWithLaser();
 
 				lineRenderer.positionCount = positionIndex + 2;
+
+				hasHitObjective = true;
+
+				Level.instance.LoadNextLevel();
 				break;
             }
 		}

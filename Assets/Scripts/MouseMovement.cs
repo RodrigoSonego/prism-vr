@@ -15,7 +15,12 @@ public class MouseMovement : MonoBehaviour
 	{
 		float timeSpeed = MouseSensitivity * Time.deltaTime;
 		Vector3 rotation = timeSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
-		playerTransform.rotation = Quaternion.Euler(playerTransform.eulerAngles + rotation);
+
+		Quaternion playerRotation = Quaternion.Euler(playerTransform.eulerAngles + rotation);
+		playerRotation.x = Mathf.Clamp(playerRotation.x, -90, 90);
+
+		playerTransform.rotation = playerRotation;
+
 
 		if (Input.GetMouseButtonDown(0))
 		{
