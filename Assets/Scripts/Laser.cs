@@ -86,13 +86,12 @@ public class Laser : MonoBehaviour
 
 			if (HasHitAbsorb(hit))
 			{
-				lineRenderer.positionCount = positionIndex + 1;
+				lineRenderer.positionCount = positionIndex + 2;
 				break;
 			}
 
 			if (HasHitObjective(hit))
             {
-				print("colaidou com objetivo");
 				Objective objective = hit.transform.gameObject.GetComponent<Objective>();
 
 				objective.ActivateLight();
