@@ -89,6 +89,16 @@ public class Laser : MonoBehaviour
 				lineRenderer.positionCount = positionIndex + 1;
 				break;
 			}
+
+			if (HasHitObjective(hit))
+            {
+				print("colaidou com objetivo");
+				Objective objective = hit.transform.gameObject.GetComponent<Objective>();
+
+				objective.ActivateLight();
+
+				break;
+            }
 		}
 	}
 
@@ -101,5 +111,10 @@ public class Laser : MonoBehaviour
 	{
 	   return hit.transform.gameObject.layer == LayerMask.NameToLayer("Absorb");
 	}
+
+	bool HasHitObjective(RaycastHit hit)
+    {
+		return hit.transform.gameObject.layer == LayerMask.NameToLayer("Absorb");
+    }
 
 }
