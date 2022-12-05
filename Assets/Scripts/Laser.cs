@@ -51,7 +51,7 @@ public class Laser : MonoBehaviour
 
 		float dist = Vector2.Distance(pos2D, originPos2D);
 
-		for (int i = 0; i < maxPoints - initialIndex; ++i)
+		for (int i = 0; i < lineRenderer.positionCount - initialIndex; ++i)
 		{
 			float ang = startAng + (i) / 100f * TAU * clockwiseModifier;
 			float unit = i * height / 100f;
@@ -96,6 +96,7 @@ public class Laser : MonoBehaviour
 
 				objective.ActivateLight();
 
+				lineRenderer.positionCount = positionIndex + 2;
 				break;
             }
 		}
@@ -113,7 +114,7 @@ public class Laser : MonoBehaviour
 
 	bool HasHitObjective(RaycastHit hit)
     {
-		return hit.transform.gameObject.layer == LayerMask.NameToLayer("Absorb");
+		return hit.transform.gameObject.layer == LayerMask.NameToLayer("Objective");
     }
 
 }
