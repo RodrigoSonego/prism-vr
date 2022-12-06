@@ -6,19 +6,28 @@ public class Objective : MonoBehaviour
     [SerializeField] private Material activatedMaterial;
     [SerializeField] private Material fadedMaterial;
     [SerializeField] private MeshRenderer mainMesh;
+    [Space]
+    [SerializeField] private ParticleSystem darkParticles;
+    [SerializeField] private ParticleSystem activatedParticles;
 
     private bool activated = false;
 
     void Start()
     {
-        StartCoroutine(BlinkLight());
+        //StartCoroutine(BlinkLight());
+
+        darkParticles.Play();
+        activatedParticles.Stop();
     }
 
     public void ActivateWithLaser()
     {
         mainMesh.material = activatedMaterial;
 
-        StopAllCoroutines();
+        darkParticles.Stop();
+        activatedParticles.Play();
+
+        //StopAllCoroutines();
     }
 
     IEnumerator BlinkLight()

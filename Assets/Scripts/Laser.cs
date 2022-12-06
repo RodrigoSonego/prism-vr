@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 [ExecuteAlways]
 public class Laser : MonoBehaviour
 {
@@ -83,6 +82,8 @@ public class Laser : MonoBehaviour
 
 			if (HasHitPrism(hit))
 			{
+				lineRenderer.positionCount += 20;
+
 				RenderSpriral(pointPosition, positionIndex + 2, !isClockwise);
 				break;
 			}
@@ -100,7 +101,6 @@ public class Laser : MonoBehaviour
 				objective.ActivateWithLaser();
 
 				lineRenderer.positionCount = positionIndex + 2;
-
 				hasHitObjective = true;
 
 				Level.instance.LoadNextLevel();

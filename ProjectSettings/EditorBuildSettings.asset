@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 3670a7190d1cc13468bf2bec5b1ecef6
+  - enabled: 1
+    path: Assets/Scenes/lvl 1.unity
+    guid: c2ea9d6e11b70a94eacfa9c80fe8f19c
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: ceac168ba92ecce41962c01a027b9e5e, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 539e002404674684f9b10a0e05c8f951, type: 2}
