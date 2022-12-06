@@ -82,7 +82,7 @@ public class Laser : MonoBehaviour
 
 			if (HasHitPrism(hit))
 			{
-				lineRenderer.positionCount += 20;
+				lineRenderer.positionCount += 5;
 
 				RenderSpriral(pointPosition, positionIndex + 2, !isClockwise);
 				break;
