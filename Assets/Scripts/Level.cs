@@ -7,9 +7,11 @@ public class Level : MonoBehaviour
 {
 	[SerializeField] private int levelIndex;
 
+
 	public static Level instance { get; private set; }
 
 
+	private const int numberOfLevels = 3;
 	private static Prism[] prisms;
 
     void Start()
@@ -21,6 +23,8 @@ public class Level : MonoBehaviour
 
     public void LoadNextLevel()
     {
+		if (levelIndex == numberOfLevels) { return; }
+
 		DisablePrisms();
 
 		StartCoroutine(LoadAfterSeconds());
