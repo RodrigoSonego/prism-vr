@@ -5,6 +5,8 @@ public class Prism : MonoBehaviour
 {
 	[SerializeField] private Outline outline;
 
+
+
 	private bool isBeingGrabbed = false;
 	private Quaternion originalRotation;
 
@@ -80,8 +82,8 @@ public class Prism : MonoBehaviour
 		Vector3 directionToPlayer = (playerTransform.forward - transform.position).normalized;
 		float angleToPlayer = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
 
-		Vector3 rotationVector = new Vector3(0, angleToPlayer, 0);
-		transform.localRotation = Quaternion.Euler(rotationVector + originalRotation.eulerAngles);
+		Vector3 rotationVector = new Vector3(0, angleToPlayer + 90, 0);
+		transform.localRotation = Quaternion.Euler(rotationVector);
 	}
 	
 }
