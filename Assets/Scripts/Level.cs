@@ -37,6 +37,10 @@ public class Level : MonoBehaviour
 		StartCoroutine(LoadAfterSeconds());
     }
 
+	public void LoadMenuScene()
+	{
+		SceneManager.LoadScene("Menu");
+	}
 
 	private Prism[] GetPrisms()
     {

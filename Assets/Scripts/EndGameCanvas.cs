@@ -16,7 +16,7 @@ public class EndGameCanvas : MonoBehaviour
 
     public void _LoadMenuScene()
     {
-        SceneManager.LoadScene("Menu");
+        Level.instance.LoadMenuScene();
     }
 
     private void PauseGameAndShowCanvas()
