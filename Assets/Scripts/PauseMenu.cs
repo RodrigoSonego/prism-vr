@@ -1,22 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EndGameCanvas : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         gameObject.SetActive(true);
 
         HideCanvas();
+    }
 
-        if(Objective.instance != null)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Objective.instance.OnFullyCharge += PauseGameAndShowCanvas;
+            PauseGameAndShowCanvas();
         }
     }
 
-    public void _LoadMenuScene()
+    public void _ContinueGame()
+    {
+        HideCanvas();
+
+        Level.instance.Unpause();
+    }
+
+    public void _ReturnToMenu()
     {
         Level.instance.LoadMenuScene();
     }
@@ -33,7 +44,7 @@ public class EndGameCanvas : MonoBehaviour
 
         if (graphics == null) { return; }
 
-        foreach(var graphic in graphics)
+        foreach (var graphic in graphics)
         {
             graphic.enabled = true;
         }
@@ -47,6 +58,7 @@ public class EndGameCanvas : MonoBehaviour
 
         foreach (var graphic in graphics)
         {
+            graphic.gameObject.SetActive(true);
             graphic.enabled = false;
         }
     }

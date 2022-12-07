@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class Level : MonoBehaviour
 
 		prisms = GetPrisms();
 
-		Time.timeScale = 1;
+		Unpause();
     }
 
 	public void Pause()
@@ -28,6 +29,12 @@ public class Level : MonoBehaviour
 		Time.timeScale = 0;
 		Cursor.lockState = CursorLockMode.None;
 	}
+
+    public void Unpause()
+    {
+		Time.timeScale = 1;
+		Cursor.lockState = CursorLockMode.Locked;
+    }
 
     public void LoadNextLevel()
     {
