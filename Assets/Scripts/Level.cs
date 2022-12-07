@@ -23,9 +23,8 @@ public class Level : MonoBehaviour
 
     public void LoadNextLevel()
     {
-		if (levelIndex == numberOfLevels) { return; }
-
 		DisablePrisms();
+		if (levelIndex == numberOfLevels) { return; }
 
 		StartCoroutine(LoadAfterSeconds());
     }
