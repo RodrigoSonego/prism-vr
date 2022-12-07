@@ -886,7 +886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549846825}
   m_LocalRotation: {x: -0, y: -0.260434, z: -0, w: 0.96549165}
-  m_LocalPosition: {x: -1.29, y: 0.25, z: -0.82}
+  m_LocalPosition: {x: -1.559, y: 0.25, z: -1.054}
   m_LocalScale: {x: 0.6987502, y: 0.6987502, z: 0.12276342}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2547,27 +2547,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913740171539478943, guid: 9cd080b5fce28cc4fa7f1ff504dac3e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2686,6 +2686,10 @@ PrefabInstance:
     - target: {fileID: 9143058316970060409, guid: f8e9e8ee348abe340b960042b4711330, type: 3}
       propertyPath: m_Name
       value: EndGamePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143058316970060409, guid: f8e9e8ee348abe340b960042b4711330, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9143058316970060414, guid: f8e9e8ee348abe340b960042b4711330, type: 3}
       propertyPath: m_Pivot.x
