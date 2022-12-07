@@ -2465,13 +2465,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8711340630485334675, guid: c796df94b7d45334eb11509505a7828d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 8711340630485334675, guid: c796df94b7d45334eb11509505a7828d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.04
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c796df94b7d45334eb11509505a7828d, type: 3}
