@@ -19,7 +19,15 @@ public class Level : MonoBehaviour
 		instance = this;
 
 		prisms = GetPrisms();
+
+		Time.timeScale = 1;
     }
+
+	public void Pause()
+    {
+		Time.timeScale = 0;
+		Cursor.lockState = CursorLockMode.None;
+	}
 
     public void LoadNextLevel()
     {

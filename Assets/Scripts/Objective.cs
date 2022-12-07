@@ -19,7 +19,7 @@ public class Objective : MonoBehaviour
 
     public static Objective instance;
 
-    void Start()
+    void OnEnable()
     {
         instance = this;
 
