@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Objective : MonoBehaviour
 {
@@ -10,35 +12,51 @@ public class Objective : MonoBehaviour
     [SerializeField] private ParticleSystem darkParticles;
     [SerializeField] private ParticleSystem activatedParticles;
 
-    private bool activated = false;
+
+    public Action OnFullyCharge;
+
+
+    public static Objective instance;
 
     void Start()
     {
-        //StartCoroutine(BlinkLight());
+        instance = this;
 
-        darkParticles.Play();
-        activatedParticles.Stop();
+        GoDark();
     }
 
-    public void ActivateWithLaser()
+    public void OnLaserHit()
     {
         mainMesh.material = activatedMaterial;
 
         darkParticles.Stop();
         activatedParticles.Play();
 
-        //StopAllCoroutines();
+        StartCoroutine(WaitToFullyCharge());
     }
 
-    IEnumerator BlinkLight()
+    public void OnLaserContactLost()
     {
-        while (true)
+        GoDark();
+        StopAllCoroutines();
+    }
+
+
+    private void GoDark()
+    {
+        darkParticles.Play();
+        activatedParticles.Stop();
+    }
+
+    IEnumerator WaitToFullyCharge()
+    {
+        yield return new WaitForSeconds(1);
+
+        if(OnFullyCharge != null)
         {
-            mainMesh.material = activated ? fadedMaterial : activatedMaterial;
-
-            activated = !activated;
-
-            yield return new WaitForSeconds(1.5f);
+            OnFullyCharge();
         }
+
+        Level.instance.LoadNextLevel();
     }
 }

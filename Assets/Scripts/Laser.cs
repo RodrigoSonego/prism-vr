@@ -18,11 +18,17 @@ public class Laser : MonoBehaviour
 	[SerializeField] private float slope = 0f;
 	[SerializeField] private float height = 1.5f;
 
-	private bool hasHitObjective = false;
+	private bool hasContactWithObjective = false;
+	private bool objectiveHasCharged = false;
+
+    void Start()
+    {
+		Objective.instance.OnFullyCharge += OnObjectiveCharge;
+    }
 
     void Update()
 	{
-		if (hasHitObjective) { return; }
+		if (objectiveHasCharged) { return; }
 
 		lineRenderer.positionCount = maxPoints;
 		RenderSpriral(origin.transform.position, 0, isClockwise: true);
@@ -75,10 +81,24 @@ public class Laser : MonoBehaviour
 
 			lineRenderer.SetPosition(positionIndex, pointPosition);
 
-			if (hasHit == false) { continue; }
+			if (hasHit == false)
+			{
+				CheckIfLostObjectiveContact(positionIndex);
+
+				continue; 
+			}
 
 			lineRenderer.positionCount++;
 			lineRenderer.SetPosition(positionIndex + 1, hit.point);
+
+			if (HasHitObjective(hit))
+			{
+				Objective.instance.OnLaserHit();
+
+				hasContactWithObjective = true;
+				lineRenderer.positionCount = positionIndex + 2;
+				break;
+			}
 
 			if (HasHitPrism(hit))
 			{
@@ -91,21 +111,10 @@ public class Laser : MonoBehaviour
 			if (HasHitAbsorb(hit))
 			{
 				lineRenderer.positionCount = positionIndex + 2;
+
+				CheckIfLostObjectiveContact(positionIndex + 1);
 				break;
 			}
-
-			if (HasHitObjective(hit))
-            {
-				Objective objective = hit.transform.gameObject.GetComponent<Objective>();
-
-				objective.ActivateWithLaser();
-
-				lineRenderer.positionCount = positionIndex + 2;
-				hasHitObjective = true;
-
-				Level.instance.LoadNextLevel();
-				break;
-            }
 		}
 	}
 
@@ -120,8 +129,22 @@ public class Laser : MonoBehaviour
 	}
 
 	bool HasHitObjective(RaycastHit hit)
-    {
+	{
 		return hit.transform.gameObject.layer == LayerMask.NameToLayer("Objective");
+	}
+
+	void OnObjectiveCharge()
+    {
+		objectiveHasCharged = true;
     }
 
+	void CheckIfLostObjectiveContact(int positionIndex)
+    {
+		if (positionIndex == lineRenderer.positionCount - 1 && hasContactWithObjective) 
+        {
+			print("perdeste");
+			hasContactWithObjective = false;
+			Objective.instance.OnLaserContactLost();
+        }
+    }
 }
