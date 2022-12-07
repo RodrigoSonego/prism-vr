@@ -11,6 +11,7 @@ public class Objective : MonoBehaviour
     [Space]
     [SerializeField] private ParticleSystem darkParticles;
     [SerializeField] private ParticleSystem activatedParticles;
+    [SerializeField] private ParticleSystem burstParticles;
 
 
     public Action OnFullyCharge;
@@ -23,6 +24,7 @@ public class Objective : MonoBehaviour
         instance = this;
 
         GoDark();
+        burstParticles.Stop();
     }
 
     public void OnLaserHit()
@@ -46,15 +48,17 @@ public class Objective : MonoBehaviour
     {
         darkParticles.Play();
         activatedParticles.Stop();
+        mainMesh.material = fadedMaterial;
     }
 
     IEnumerator WaitToFullyCharge()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         if(OnFullyCharge != null)
         {
             OnFullyCharge();
+            burstParticles.Play();
         }
 
         Level.instance.LoadNextLevel();
