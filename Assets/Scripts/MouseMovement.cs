@@ -5,7 +5,8 @@ public class MouseMovement : MonoBehaviour
 	[SerializeField] private Transform playerTransform;
 	const float MouseSensitivity = 300f;
 
-	
+	private float cameraXRotation = 0f;
+
 	void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
@@ -16,10 +17,11 @@ public class MouseMovement : MonoBehaviour
 		float timeSpeed = MouseSensitivity * Time.deltaTime;
 		Vector3 rotation = timeSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
 
-		Quaternion playerRotation = Quaternion.Euler(playerTransform.eulerAngles + rotation);
-		playerRotation.x = Mathf.Clamp(playerRotation.x, -90, 90);
+		cameraXRotation += rotation.x;
+		cameraXRotation = Mathf.Clamp(cameraXRotation, -90, 90);
 
-		playerTransform.rotation = playerRotation;
+		transform.localRotation = Quaternion.Euler(cameraXRotation, 0, 0);
+		playerTransform.Rotate(Vector3.up * rotation.y);
 
 
 		if (Input.GetMouseButtonDown(0))
