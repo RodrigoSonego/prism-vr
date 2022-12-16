@@ -24,7 +24,7 @@ public class Prism : MonoBehaviour
 	}
 	
 
-	public void ToggleGrabbed(Transform playerAnchor)
+	public void ToggleGrabbed(Transform playerAnchor, Transform cameraTransform)
 	{
 		if (isBeingGrabbed)
 		{
@@ -35,7 +35,7 @@ public class Prism : MonoBehaviour
 		outline.enabled = true;
 		isBeingGrabbed = true;
 		
-		StartCoroutine(GetDraggedByPlayer(playerAnchor));
+		StartCoroutine(GetDraggedByPlayer(playerAnchor, cameraTransform));
 	}
 
 	public void DisablePrism()
@@ -53,11 +53,11 @@ public class Prism : MonoBehaviour
 		outline.enabled = false;
 	}
 
-	private IEnumerator GetDraggedByPlayer(Transform playerAnchor)
+	private IEnumerator GetDraggedByPlayer(Transform playerAnchor, Transform cameraTransform)
 	{
 		while (isBeingGrabbed) 
 		{
-			Vector3 newPosition = CalculateNewPosition(playerAnchor);
+			Vector3 newPosition = CalculateNewPosition(playerAnchor, cameraTransform);
 			transform.position = newPosition;
 
 			RotateTowardsPlayer(playerAnchor);
@@ -66,13 +66,13 @@ public class Prism : MonoBehaviour
 		}
 	}
 
-	private Vector3 CalculateNewPosition(Transform playerTransform)
+	private Vector3 CalculateNewPosition(Transform playerTransform, Transform cameraTransform)
 	{
-		float ang = playerTransform.localRotation.eulerAngles.x * Mathf.Deg2Rad;
-		float height = Mathf.Clamp(Mathf.Tan(ang) * radius, -HeightMax, HeightMax);
+		float cameraRotation = cameraTransform.localRotation.eulerAngles.x;
+		float ang = -cameraRotation * Mathf.Deg2Rad;
+		float height = Mathf.Tan(ang) * radius;
 
-		Vector3 forward = playerTransform.forward;
-		Vector3 newPos = new Vector3(forward.x * radius, -height, forward.z * radius);
+		Vector3 newPos = new Vector3(playerTransform.forward.x * radius, height, playerTransform.forward.z * radius);
 
 		return newPos;
 	}

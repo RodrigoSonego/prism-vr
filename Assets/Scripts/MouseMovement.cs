@@ -29,7 +29,7 @@ public class MouseMovement : MonoBehaviour
 			bool couldFindCube = TryToGrabCube(out Prism cube);
 			if (couldFindCube)
 			{
-				cube.ToggleGrabbed(playerTransform);
+				cube.ToggleGrabbed(playerTransform, transform);
 			}
 		}
 		
